@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <!-- v-on 하위컴퍼넌트에서 발생한 이벤트 이름 = "상위 컴퍼넌트 메소드 이름" -->
+        <span>{{ num }}</span>
+        <app-header v-on:pass='logText' ></app-header> <!-- pass 라는 emit을 받아서 logText 를 실행함 -->
+        <app-content v-on:pass2='write'></app-content>
+    </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var appHeader = {
+                template: '<button v-on:click="passEvent">Click me </button>',
+                methods:{
+                    passEvent: function(){
+                        this.$emit('pass'); //1. click 시 -> pass 라는 emit 을 발생함
+                    }
+                }
+            }
+
+            var appContent = {
+                template : '<button v-on:click="addNumber">add</button>',
+                methods :{
+                    addNumber : function(){
+                        this.$emit('pass2')
+                    }
+                }
+            }
+            new Vue({
+                el : '#app',
+                components : {
+                    'app-header' : appHeader,
+                    'app-content' : appContent
+                },
+                methods :{
+                    logText : function(){
+                        console.log('hi');
+                    },
+                    write : function (){
+                        this.num +=1;
+                        console.log(this.num)
+                    }
+                
+                },
+                data :{
+                    num : 10
+                }
+            });
+        </script>
+    
+</body>
+</html>
