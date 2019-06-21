@@ -24,7 +24,7 @@
       },
       methods: {
         getData: function() { 
-          var vm = this;
+          var vm = this; //axios 안에서 this 와 외부 this 는 다르다
           axios.get('https://jsonplaceholder.typicode.com/users/')
             .then(function(response) {
               console.log(response.data);
