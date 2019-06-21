@@ -25,6 +25,12 @@
             Loading....
         </div>
 
+        <div>
+            <!-- 인풋박스를 만들고 입력된 p값을 태그에 출력 하기 -->
+            <input type = 'text' v-model='message'>
+            <p> {{ message }}</p>
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script>
             new Vue({
@@ -34,7 +40,8 @@
                     num : 10,
                     uuid : 'abc1234',
                     name : 'text-blue',
-                    loading : true
+                    loading : true,
+                    message : ''
                 },
                 computed:{ //계산된 속성
                     doubleNum : function(){
