@@ -1,9 +1,12 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class='shadow'>
-                <i class="fas fa-check checkBtn" v-on:click='toggleComplete'></i>
-                <span class='textCompleted'>{{ todoItem.item }}</span>
+            <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class='shadow'>
+                                                            <!-- completed 가 ture/false에 따라 보이고안보이거 결정 -->
+                <i class="fas fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}"
+                 v-on:click='toggleComplete(todoItem, index)'></i>
+                        <!-- class 를 v-bind 로 값 바인딩함 -->
+                <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
                 <span class='removeBtn' v-on:click='removeTodo(todoItem, index)'>
                     <i class="fas fa-trash"></i>
                 </span>
@@ -26,8 +29,10 @@ export default {
           localStorage.removeItem(todoItem);
           this.todoItems.splice(index, 1);
       },
-      toggleComplete: function(){
-          
+      toggleComplete: function(todoItem, index){
+          todoItem.completed = !todoItem.completed;
+          localStorage.removeItem(todoItem.item);
+          localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
       }  
     },
     created: function(){
