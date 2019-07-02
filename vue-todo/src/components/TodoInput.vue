@@ -18,10 +18,7 @@ data: function(){
 methods:{
     addTodo: function(){
         if(this.newTodoItem !== ''){
-        var obj = {completed: false, item: this.newTodoItem}; //text 값 + 텍스트 체크여부
-        console.log(this.newTodoItem);
-        //저장하는 로직
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //local 에서보여줄때 String 으로 변환
+        this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
         }
     },
