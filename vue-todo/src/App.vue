@@ -24,7 +24,7 @@ export default {
   },
   methods:{
     addOneItem:function(todoItem){
-      var obj = {completed: false, item: todoItem}; //text 값 + 텍스트 체크여부
+      const obj = {completed: false, item: todoItem}; //text 값 + 텍스트 체크여부
         //저장하는 로직
         localStorage.setItem(todoItem, JSON.stringify(obj)); //local 에서보여줄때 String 으로 변환
 
@@ -46,7 +46,7 @@ export default {
   },
   created: function(){
  if(localStorage.length>0){
-            for(var i=0; i<localStorage.length; i++){
+            for(let i=0; i<localStorage.length; i++){
                 if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
 
