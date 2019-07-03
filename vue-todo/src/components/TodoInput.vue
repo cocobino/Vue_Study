@@ -32,7 +32,9 @@ data: function(){
 methods:{
     addTodo: function(){
         if(this.newTodoItem !== ''){
-        this.$emit('addTodoItem', this.newTodoItem);
+            const text =  this.newTodoItem.trim();
+        this.$store.commit('addOneItem', text);
+        // this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
         }
         else{
@@ -42,7 +44,6 @@ methods:{
     },
     clearInput:function(){
         this.newTodoItem = '';
-        
     },
 components:{
     Modal,

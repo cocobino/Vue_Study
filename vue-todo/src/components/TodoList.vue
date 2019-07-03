@@ -1,7 +1,7 @@
 <template>
     <div>
          <transition-group name="list" tag="ul">
-            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class='shadow'>
+            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class='shadow'>
                                                             <!-- completed 가 ture/false에 따라 보이고안보이거 결정 -->
                 <i class="fas fa-check checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}"
                  v-on:click='toggleComplete(todoItem, index)'></i>
@@ -17,7 +17,6 @@
 
 <script>
 export default {
-    props: ['propsdata'],
     data:function(){
         return{
            
@@ -26,10 +25,13 @@ export default {
     methods:{
         
       removeTodo(todoItem, index){
-          this.$emit("removeItem", todoItem, index);          
+        //   this.$emit("removeItem", todoItem, index);     
+          this.$store.commit("removeOneItem", {todoItem, index});    
+           
       },
       toggleComplete(todoItem, index){
-          this.$emit('toggleItem', todoItem, index);
+          this.$store.commit("toggleOneItem", {todoItem, index});
+        //   this.$emit('toggleItem', todoItem, index);
       }  
     },
     created(){
