@@ -17,34 +17,34 @@ import TodoFooter from './components/TodoFooter.vue';
 
 export default {
   
-  data: function(){
+  data(){
     return{
       todoItems: []
     }
   },
   methods:{
-    addOneItem:function(todoItem){
+    addOneItem(todoItem){
       const obj = {completed: false, item: todoItem}; //text 값 + 텍스트 체크여부
         //저장하는 로직
         localStorage.setItem(todoItem, JSON.stringify(obj)); //local 에서보여줄때 String 으로 변환
 
         this.todoItems.push(obj);
     },
-    removeOneItem : function(todoItem, index){
+    removeOneItem(todoItem, index){
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function(todoItem, index){
+    toggleOneItem(todoItem, index){
        this.todoItem[index].completed = !this.todoItems[index].completed;
           localStorage.removeItem(todoItem.item);
           localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItem:function(){
+    clearAllItem(){
       localStorage.clear(); //local storage 만 비우고 화면을 비우지않음
       this.todoItems = [];
     }
   },
-  created: function(){
+  created(){
  if(localStorage.length>0){
             for(let i=0; i<localStorage.length; i++){
                 if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
