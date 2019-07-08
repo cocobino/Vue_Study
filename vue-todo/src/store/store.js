@@ -21,6 +21,11 @@ export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch()
     },
+    getters:{
+      storedTodoItems(){
+        return state.todoItems;
+      }
+    },
     mutations:{
         addOneItem(state, todoItem){
             const obj = {completed: false, item: todoItem}; //text 값 + 텍스트 체크여부
